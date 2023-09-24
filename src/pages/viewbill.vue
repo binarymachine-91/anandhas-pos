@@ -110,7 +110,7 @@ export default {
       var doc = new jsPDF({
         format: "a3",
       })
-      doc.setFontSize(15);
+      doc.setFontSize(15)
       doc.text('HOTEL ANANDHAS', 130, 5)
       // Draw a horizontal line under the header
       doc.setLineWidth(0.4)

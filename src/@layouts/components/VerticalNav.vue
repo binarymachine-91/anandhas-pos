@@ -63,8 +63,8 @@ const handleNavScroll = evt => {
             v-html="logo"
           />
 
-          <h1 class="leading-normal">
-            Anandhas
+          <h1 class="leading-normal" style="margin-top:20px">
+            ANANDHAS
           </h1>
         </RouterLink>
       </slot>

@@ -132,6 +132,8 @@ export default {
           'qty': this.formStateItem.qty,
           'iid': this.formStateItem.menu
         })
+        this.formStateItem.menu = ''
+        this.formStateItem.qty = 1
       }
       else {
         var last_index = _.orderBy(this.menu_table, 'sid', 'desc')[0]['sid']
@@ -143,7 +145,10 @@ export default {
           'qty': this.formStateItem.qty,
           'iid': this.formStateItem.menu,
         })
+        this.formStateItem.menu = ''
+        this.formStateItem.qty = 1
       }
+
     },
     onFinishFailedItem(){
       console.log("failed")

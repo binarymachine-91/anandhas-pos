@@ -72,7 +72,7 @@ export default {
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_menu()
-          this.menu = ''
+          this.formState.menu = ''
         })
     },
     update_menu(data) {

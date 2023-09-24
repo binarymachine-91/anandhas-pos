@@ -135,7 +135,6 @@ export default {
         'menu_items': this.item_table,
       })
         .then(response => {
-          console.log(response)
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_menu_items()
           this.formState.item = ''
