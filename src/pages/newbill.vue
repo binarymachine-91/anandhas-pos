@@ -58,7 +58,7 @@ export default {
   methods: {
     get_user() {
       try {
-        axios.get("http://127.0.0.1:4242/get_staff/-1")
+        axios.get("https://anandhas-api-server.onrender.com/get_staff/-1")
           .then(response => {
             this.user_data = response.data
           })
@@ -68,7 +68,7 @@ export default {
     },
     get_bill_no() {
       try {
-        axios.get("http://127.0.0.1:4242/get_bill_no")
+        axios.get("https://anandhas-api-server.onrender.com/get_bill_no")
           .then(response => {
             this.formState.bill_no = response.data
           })
@@ -96,7 +96,7 @@ export default {
         this.formState.o_date = moment(new Date(this.formState.order_date)).format('DDMMYYYY')
         this.formState.d_date = moment(new Date(this.formState.delivery_date)).format('DDMMYYYYHHmm')
         console.log(this.formState)
-        axios.post("http://127.0.0.1:4242/save_bill", this.formState)
+        axios.post("https://anandhas-api-server.onrender.com/save_bill", this.formState)
           .then(response => {
             this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
             this.formState.name = ''
@@ -150,7 +150,7 @@ export default {
     },
     get_menu() {
       try {
-        const response = axios.get("http://127.0.0.1:4242/get_menu/-1")
+        const response = axios.get("https://anandhas-api-server.onrender.com/get_menu/-1")
           .then(response => {
             this.menu_data = response.data
           })
@@ -159,7 +159,7 @@ export default {
       }
     },
     create_menu() {
-      axios.post("http://127.0.0.1:4242/create_menu", { "name": this.formState.menu })
+      axios.post("https://anandhas-api-server.onrender.com/create_menu", { "name": this.formState.menu })
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_menu()
@@ -167,7 +167,7 @@ export default {
         })
     },
     update_menu(data) {
-      axios.post("http://127.0.0.1:4242/update_menu", data)
+      axios.post("https://anandhas-api-server.onrender.com/update_menu", data)
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_menu()

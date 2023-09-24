@@ -39,7 +39,7 @@ export default {
       this.$refs.cm.show(event.originalEvent)
     },
     editUser(event) {
-      axios.post("http://127.0.0.1:4242/update_staff", event.newData)
+      axios.post("https://anandhas-api-server.onrender.com/update_staff", event.newData)
         .then(response => {
           this.get_user()
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
@@ -48,7 +48,7 @@ export default {
         })
     },
     deleteUser(menu) {
-      axios.delete(`http://127.0.0.1:4242/delete_staff/${menu.sid}`)
+      axios.delete(`https://anandhas-api-server.onrender.com/delete_staff/${menu.sid}`)
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_user() // Refresh the table after deletion
@@ -65,7 +65,7 @@ export default {
     },
     get_user() {
       try {
-        const response =  axios.get("http://127.0.0.1:4242/get_staff/-1")
+        const response =  axios.get("https://anandhas-api-server.onrender.com/get_staff/-1")
           .then(response => {
             this.user_table = response.data
           })
@@ -74,7 +74,7 @@ export default {
       }
     },
     create_user() {
-      axios.post("http://127.0.0.1:4242/create_staff", { "name": this.formState.name, "department": this.formState.department })
+      axios.post("https://anandhas-api-server.onrender.com/create_staff", { "name": this.formState.name, "department": this.formState.department })
         .then(response => {
           this.get_user()
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })

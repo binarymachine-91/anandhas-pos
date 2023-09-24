@@ -50,7 +50,7 @@ export default {
 
       this.item_table = newArr
 
-      axios.post("http://127.0.0.1:4242/create_menu_item", {
+      axios.post("https://anandhas-api-server.onrender.com/create_menu_item", {
         'menu_id': this.selectedMenu,
         'menu_items': this.item_table,
       })
@@ -65,7 +65,7 @@ export default {
         return o.iid != menu.iid
       })
       this.item_table = fil
-      axios.post("http://127.0.0.1:4242/create_menu_item", {
+      axios.post("https://anandhas-api-server.onrender.com/create_menu_item", {
         'menu_id': this.selectedMenu,
         'menu_items': this.item_table,
       })
@@ -103,7 +103,7 @@ export default {
     },
     get_menu() {
       try {
-        const response = axios.get("http://127.0.0.1:4242/get_menu/-1")
+        const response = axios.get("https://anandhas-api-server.onrender.com/get_menu/-1")
           .then(response => {
             this.menu_table = response.data
             var keys = { mid: 'value', name: 'label' }
@@ -121,7 +121,7 @@ export default {
     },
     get_menu_items() {
       try {
-        axios.get("http://127.0.0.1:4242/get_menu_items/" + this.selectedMenu)
+        axios.get("https://anandhas-api-server.onrender.com/get_menu_items/" + this.selectedMenu)
           .then(response => {
             this.item_table = response.data
           })
@@ -130,7 +130,7 @@ export default {
       }
     },
     create_menu_item() {
-      axios.post("http://127.0.0.1:4242/create_menu_item", {
+      axios.post("https://anandhas-api-server.onrender.com/create_menu_item", {
         'menu_id': this.selectedMenu,
         'menu_items': this.item_table,
       })
