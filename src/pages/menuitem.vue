@@ -168,6 +168,7 @@ export default {
           >
             <a-select
               ref="select"
+              show-search
               v-model:value="formState.menu"
               style="width: 250px"
               :options="menu_names"

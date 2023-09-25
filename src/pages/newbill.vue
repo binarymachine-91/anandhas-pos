@@ -52,7 +52,7 @@ export default {
   mounted() {
     this.get_user()
     this.get_menu()
-    this.get_bill_no()
+    // this.get_bill_no()
   },
   // eslint-disable-next-line vue/component-api-style
   methods: {
@@ -199,6 +199,7 @@ export default {
           <a-form-item
             label="Bill No"
             name="bill_no"
+            v-if="false"
           >
             <a-input v-model:value="formState.bill_no" disabled style="width: 250px"/>
           </a-form-item>

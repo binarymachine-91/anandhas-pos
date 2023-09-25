@@ -20,6 +20,7 @@ export default {
       bill_table: [],
       details_table: [],
       selectedMenu: null,
+      selectedItem: null,
       enabler: {
         reportButton: false,
       },
@@ -45,7 +46,8 @@ export default {
         name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
       },
       menuModel: [
-        { label: 'Delete', icon: 'pi pi-fw pi-times', command: () => this.deleteMenu(this.selectedMenu) },
+        { label: 'Paid', icon: 'pi pi-fw pi-times', command: () => this.paidBill(this.selectedMenu) },
+        { label: 'Delivered', icon: 'pi pi-fw pi-times', command: () => this.deliveryBill(this.selectedMenu) },
       ],
     }
   },
@@ -55,6 +57,20 @@ export default {
   },
   // eslint-disable-next-line vue/component-api-style
   methods: {
+    paidBill() {
+      axios.get("https://anandhas-api-server.onrender.com/update_bill/" + this.selectedItem.bid)
+        .then(response => {
+          this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
+          this.get_bill()
+        })
+    },
+    deliveryBill() {
+      axios.get("https://anandhas-api-server.onrender.com/delivery_bill/" + this.selectedItem.bid)
+        .then(response => {
+          this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
+          this.get_bill()
+        })
+    },
     get_bill() {
       axios.get("https://anandhas-api-server.onrender.com/get_bills/-1")
         .then(response => {
@@ -82,6 +98,11 @@ export default {
           })
       } catch (error) {
         console.error(error)
+      }
+    },
+    rowStyle(data) {
+      if (data.paid === 'Unpaid') {
+        return { backgroundColor: '#ff8e72' }
       }
     },
     get_bill_no() {
@@ -178,15 +199,19 @@ export default {
 <template>
   <Toast />
   <a-row :gutter="20">
-    <a-col :span="14">
+    <a-col :span="18">
       <a-card title="Available Bills" :bordered="false">
+        <ContextMenu ref="cm" :model="menuModel" />
         <DataTable
           v-model:editingRows="editingRows"
           v-model:filters="filters"
           :value="this.bill_table"
+          :rowStyle="rowStyle"
           showGridlines
           class="p-datatable-sm"
           dataKey="bid"
+          contextMenu v-model:contextMenuSelection="selectedItem"
+          @rowContextmenu="onRowContextMenu"
           v-model:selection="selectedBill"
           @rowSelect="onRowSelect"
           selectionMode="single"
@@ -206,6 +231,7 @@ export default {
           </template>
           <template #empty> No menu found. </template>
           <Column field="bid" header="ID"></Column>
+          <Column field="paid" header="Payment Status" sortable></Column>
           <Column field="name" header="name"></Column>
           <Column field="mobile" header="mobile"></Column>
           <Column field="address" header="address"></Column>
@@ -214,10 +240,11 @@ export default {
           <Column field="d_staff" header="Delivery Staff"></Column>
           <Column field="o_date" header="Order Date" sortable></Column>
           <Column field="d_date" header="Delivery Date" sortable></Column>
+          <Column field="delivery" header="Delivery Status" sortable></Column>
         </DataTable>
       </a-card>
     </a-col>
-    <a-col :span="10">
+    <a-col :span="6">
       <a-card title="View Bill" :bordered="false">
         <Button style="margin-bottom:20px"  v-if="enabler.reportButton" @click="generatePDF" label="Print" />
         <TreeTable
