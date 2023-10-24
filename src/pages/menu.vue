@@ -61,7 +61,13 @@ export default {
       try {
         const response = axios.get("https://anandhas-api-server.onrender.com/get_menu/-1")
           .then(response => {
-            this.menu_table = response.data
+            if(Array.isArray(response.data)) {
+              this.menu_table = response.data
+            }
+            else {
+              this.$toast.add({ severity: 'error', summary: 'Error', detail: 'Error on Server!', life: 3000 })
+            }
+
           })
       } catch (error) {
         console.error(error)
