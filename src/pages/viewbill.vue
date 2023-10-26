@@ -1,7 +1,7 @@
 <script>
 import axios from "axios"
 import pdfMake from 'pdfmake/build/pdfmake'
-import pdfFonts from 'pdfmake/build/vfs_fonts'
+import pdfFonts from '@/pages/vfs_fonts'
 import { font } from "@/pages/tamilfont"
 import { FilterMatchMode } from "primevue/api"
 import _ from "lodash"
@@ -215,7 +215,8 @@ export default {
       // console.log(this.pdfDataUri)
     },
     generatePdf1() {
-      pdfMake.vfs = pdfFonts.pdfMake.vfs
+      // pdfmake.vfs = pdfFonts.pdfMake ? pdfFonts.pdfMake.vfs : pdfmake.vfs;
+      pdfMake.vfs = pdfFonts
       pdfMake.vfs["TiroTamil-Regular.ttf"] = font
       pdfMake.fonts= {
         TiroTamilRegular: {
