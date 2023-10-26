@@ -62,21 +62,21 @@ export default {
   // eslint-disable-next-line vue/component-api-style
   methods: {
     paidBill() {
-      axios.get("http://localhost:4242/update_bill/" + this.selectedItem.bid)
+      axios.get("https://anandhas-api-server.onrender.com/update_bill/" + this.selectedItem.bid)
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_bill()
         })
     },
     deliveryBill() {
-      axios.get("http://localhost:4242/delivery_bill/" + this.selectedItem.bid)
+      axios.get("https://anandhas-api-server.onrender.com/delivery_bill/" + this.selectedItem.bid)
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_bill()
         })
     },
     get_bill() {
-      axios.get("http://localhost:4242/get_bills/-1")
+      axios.get("https://anandhas-api-server.onrender.com/get_bills/-1")
         .then(response => {
           _.forEach(response.data, o=> {
             o.o_date = moment(o.o_date, 'DDMMYYYY').format("DD/MM/YYYY")
@@ -87,7 +87,7 @@ export default {
         })
     },
     onRowSelect(event) {
-      axios.get("http://localhost:4242/get_bill_details/" + this.selectedBill.bid)
+      axios.get("https://anandhas-api-server.onrender.com/get_bill_details/" + this.selectedBill.bid)
         .then(response => {
           this.details_table = response.data
           this.enabler.reportButton = true
@@ -96,7 +96,7 @@ export default {
     },
     get_user() {
       try {
-        axios.get("http://localhost:4242/get_staff/-1")
+        axios.get("https://anandhas-api-server.onrender.com/get_staff/-1")
           .then(response => {
             this.user_data = response.data
           })
@@ -111,7 +111,7 @@ export default {
     },
     get_bill_no() {
       try {
-        axios.get("http://localhost:4242/get_bill_no")
+        axios.get("https://anandhas-api-server.onrender.com/get_bill_no")
           .then(response => {
             this.formState.bill_no = response.data
           })
@@ -120,13 +120,13 @@ export default {
       }
     },
     get_report_data(){
-      axios.get("http://localhost:4242/get_report_data/" + this.selectedBill.bid)
+      axios.get("https://anandhas-api-server.onrender.com/get_report_data/" + this.selectedBill.bid)
         .then(response => {
           this.reportdata = response.data
         })
     },
     get_report_data1(){
-      axios.get("http://localhost:4242/get_report_data1/" + this.selectedBill.bid)
+      axios.get("https://anandhas-api-server.onrender.com/get_report_data1/" + this.selectedBill.bid)
         .then(response => {
           this.reportdata = response.data
         })
