@@ -44,7 +44,7 @@ export default {
       })
     },
     deleteMenu(menu) {
-      axios.delete("https://anandhas-api-server.onrender.com/delete_menu/" + menu.mid)
+      axios.delete("http://localhost:4242/delete_menu/" + menu.mid)
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_menu()
@@ -59,7 +59,7 @@ export default {
     },
     get_menu() {
       try {
-        const response = axios.get("https://anandhas-api-server.onrender.com/get_menu/-1")
+        const response = axios.get("http://localhost:4242/get_menu/-1")
           .then(response => {
             if(Array.isArray(response.data)) {
               this.menu_table = response.data
@@ -74,7 +74,7 @@ export default {
       }
     },
     create_menu() {
-      axios.post("https://anandhas-api-server.onrender.com/create_menu", { "name": this.formState.menu })
+      axios.post("http://localhost:4242/create_menu", { "name": this.formState.menu })
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_menu()
@@ -82,7 +82,7 @@ export default {
         })
     },
     update_menu(data) {
-      axios.post("https://anandhas-api-server.onrender.com/update_menu", data)
+      axios.post("http://localhost:4242/update_menu", data)
         .then(response => {
           this.$toast.add({ severity: 'success', summary: 'Info', detail: response.data, life: 3000 })
           this.get_menu()
